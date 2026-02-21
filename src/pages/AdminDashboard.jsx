@@ -15,7 +15,8 @@ import {
   TrendingUp,
   Clock,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  AlertCircle
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -24,6 +25,8 @@ const AdminDashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({ members: 0, prayers: 0 });
+  const [statsError, setStatsError] = useState(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   
   // Login State
   const [email, setEmail] = useState('');
@@ -44,6 +47,8 @@ const AdminDashboard = () => {
   }, []);
 
   const fetchStats = async () => {
+    setIsRefreshing(true);
+    setStatsError(null);
     try {
       const membersColl = collection(db, 'members');
       const prayersColl = collection(db, 'prayers');
@@ -57,6 +62,9 @@ const AdminDashboard = () => {
       });
     } catch (err) {
       console.error("Error fetching stats:", err);
+      setStatsError(`Sync failed: ${err.message}`);
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -170,7 +178,7 @@ const AdminDashboard = () => {
             </div>
             <div className="stat-info">
               <span className="stat-label">Total Members</span>
-              <h2 className="stat-value">{stats.members}</h2>
+              <h2 className="stat-value">{isRefreshing ? "..." : stats.members}</h2>
             </div>
             <TrendingUp className="stat-trend" size={16} />
           </div>
@@ -181,11 +189,19 @@ const AdminDashboard = () => {
             </div>
             <div className="stat-info">
               <span className="stat-label">Prayer Requests</span>
-              <h2 className="stat-value">{stats.prayers}</h2>
+              <h2 className="stat-value">{isRefreshing ? "..." : stats.prayers}</h2>
             </div>
             <Clock className="stat-trend" size={16} />
           </div>
         </div>
+
+        {statsError && (
+          <div className="stats-error-box glass" style={{ marginTop: '20px', padding: '15px', color: '#ff4d4d', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <AlertCircle size={20} />
+            <p>{statsError} - Please verify your Firebase project settings in Vercel.</p>
+            <button onClick={fetchStats} className="btn-mini">Retry</button>
+          </div>
+        )}
 
         <section className="admin-sections">
           <div className="section-header">

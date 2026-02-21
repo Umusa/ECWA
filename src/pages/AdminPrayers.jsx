@@ -11,6 +11,7 @@ const AdminPrayers = () => {
   const [user, setUser] = useState(null);
   const [prayers, setPrayers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const AdminPrayers = () => {
 
   const fetchPrayers = async () => {
     setLoading(true);
+    setFetchError(null);
     try {
       const q = query(collection(db, 'prayers'), orderBy('submittedAt', 'desc'));
       const querySnapshot = await getDocs(q);
@@ -37,6 +39,7 @@ const AdminPrayers = () => {
       setPrayers(prayerList);
     } catch (err) {
       console.error("Error fetching prayers:", err);
+      setFetchError(`Database error: ${err.message}. Check your Firebase settings and Authorized Domains.`);
     } finally {
       setLoading(false);
     }
@@ -101,6 +104,13 @@ const AdminPrayers = () => {
           <div className="admin-loader" style={{ textAlign: 'center', padding: '100px 0' }}>
             <Loader2 className="spinner" size={40} style={{ margin: '0 auto 20px' }} />
             <p>Gathering intercessions...</p>
+          </div>
+        ) : fetchError ? (
+          <div className="admin-error-box glass" style={{ margin: '40px auto', padding: '40px', textAlign: 'center', maxWidth: '600px', color: '#ff4d4d' }}>
+            <AlertCircle size={48} style={{ margin: '0 auto 20px' }} />
+            <h3>Sync Failed</h3>
+            <p style={{ margin: '15px 0' }}>{fetchError}</p>
+            <button onClick={fetchPrayers} className="btn-primary">Retry Sync</button>
           </div>
         ) : (
           <div className="prayers-list glass">

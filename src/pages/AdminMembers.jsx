@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { Users, Trash2, ArrowLeft, Loader2, Search, Calendar, Phone, MapPin } from 'lucide-react';
+import { Users, Trash2, ArrowLeft, Loader2, Search, Calendar, Phone, MapPin, AlertCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -11,6 +11,7 @@ const AdminMembers = () => {
   const [user, setUser] = useState(null);
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ const AdminMembers = () => {
 
   const fetchMembers = async () => {
     setLoading(true);
+    setFetchError(null);
     try {
       const q = query(collection(db, 'members'), orderBy('submittedAt', 'desc'));
       const querySnapshot = await getDocs(q);
@@ -38,6 +40,7 @@ const AdminMembers = () => {
       setMembers(memberList);
     } catch (err) {
       console.error("Error fetching members:", err);
+      setFetchError(`Database error: ${err.message}. Check your Firebase settings and Authorized Domains.`);
     } finally {
       setLoading(false);
     }
@@ -90,6 +93,13 @@ const AdminMembers = () => {
           <div className="admin-loader" style={{ textAlign: 'center', padding: '100px 0' }}>
             <Loader2 className="spinner" size={40} style={{ margin: '0 auto 20px' }} />
             <p>Fetching member database...</p>
+          </div>
+        ) : fetchError ? (
+          <div className="admin-error-box glass" style={{ margin: '40px auto', padding: '40px', textAlign: 'center', maxWidth: '600px', color: '#ff4d4d' }}>
+            <AlertCircle size={48} style={{ margin: '0 auto 20px' }} />
+            <h3>Sync Failed</h3>
+            <p style={{ margin: '15px 0' }}>{fetchError}</p>
+            <button onClick={fetchMembers} className="btn-primary">Retry Sync</button>
           </div>
         ) : (
           <div className="admin-list-container glass">
