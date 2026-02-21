@@ -22,18 +22,29 @@ const PrayerRequest = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
+
+    // Create a timeout promise
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Connection timed out. This usually means the website cannot reach Firebase. Please check your internet or Vercel environment variables.')), 10000);
+    });
+
     try {
-      await addDoc(collection(db, 'prayers'), {
-        ...formData,
-        submittedAt: serverTimestamp(),
-        status: 'pending'
-      });
+      // Race the Firebase call against our timeout
+      await Promise.race([
+        addDoc(collection(db, 'prayers'), {
+          ...formData,
+          submittedAt: serverTimestamp(),
+          status: 'pending'
+        }),
+        timeoutPromise
+      ]);
+
       setStatus('success');
       setFormData({ fullName: '', subject: '', message: '' });
     } catch (err) {
       console.error("Firestore Prayer Error:", err);
       setStatus('error');
-      setErrorMsg(`Request failed: ${err.message}. Ensure your internet is active and database rules allow submissions.`);
+      setErrorMsg(`Request failed: ${err.message}`);
     }
   };
 

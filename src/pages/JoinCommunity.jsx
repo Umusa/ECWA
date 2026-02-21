@@ -26,11 +26,22 @@ const JoinCommunity = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
+    
+    // Create a timeout promise
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Connection timed out. This usually means the website cannot reach Firebase. Please check your internet or Vercel environment variables.')), 10000);
+    });
+
     try {
-      await addDoc(collection(db, 'members'), {
-        ...formData,
-        submittedAt: serverTimestamp()
-      });
+      // Race the Firebase call against our timeout
+      await Promise.race([
+        addDoc(collection(db, 'members'), {
+          ...formData,
+          submittedAt: serverTimestamp()
+        }),
+        timeoutPromise
+      ]);
+      
       setStatus('success');
       setFormData({
         title: '', surname: '', firstname: '',
@@ -39,7 +50,7 @@ const JoinCommunity = () => {
     } catch (err) {
       console.error("Firestore Registration Error:", err);
       setStatus('error');
-      setErrorMsg(`Submission failed: ${err.message}. Please check if Firestore is enabled and permissions are set correctly.`);
+      setErrorMsg(`Submission failed: ${err.message}`);
     }
   };
 
