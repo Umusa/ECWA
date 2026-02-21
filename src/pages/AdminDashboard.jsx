@@ -48,12 +48,12 @@ const AdminDashboard = () => {
       const membersColl = collection(db, 'members');
       const prayersColl = collection(db, 'prayers');
       
-      const membersSnap = await getCountFromServer(membersColl);
-      const prayersSnap = await getCountFromServer(prayersColl);
+      const membersSnap = await getDocs(membersColl);
+      const prayersSnap = await getDocs(prayersColl);
       
       setStats({
-        members: membersSnap.data().count,
-        prayers: prayersSnap.data().count
+        members: membersSnap.size,
+        prayers: prayersSnap.size
       });
     } catch (err) {
       console.error("Error fetching stats:", err);

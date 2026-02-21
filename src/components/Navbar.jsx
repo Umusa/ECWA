@@ -19,6 +19,7 @@ const Navbar = () => {
     { name: 'HOME', path: '/' },
     { name: 'ABOUT', path: '/about' },
     { name: 'CONTACT US', path: '/prayer-request' },
+    { name: 'ADMIN', path: '/admin' },
   ];
 
   return (
