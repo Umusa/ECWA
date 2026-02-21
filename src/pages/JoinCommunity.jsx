@@ -10,8 +10,6 @@ const JoinCommunity = () => {
     title: '',
     surname: '',
     firstname: '',
-    sex: '',
-    dob: '',
     email: '',
     phone_personal: '',
     address: '',
@@ -35,12 +33,13 @@ const JoinCommunity = () => {
       });
       setStatus('success');
       setFormData({
-        title: '', surname: '', firstname: '', sex: '', dob: '',
+        title: '', surname: '', firstname: '',
         email: '', phone_personal: '', address: '', spiritual_gifts: ''
       });
     } catch (err) {
+      console.error("Firestore Registration Error:", err);
       setStatus('error');
-      setErrorMsg(err.message);
+      setErrorMsg(`Submission failed: ${err.message}. Please check if Firestore is enabled and permissions are set correctly.`);
     }
   };
 
@@ -91,20 +90,6 @@ const JoinCommunity = () => {
                     </div>
                   </div>
 
-                  <div className="grid-2" style={{ marginTop: '20px' }}>
-                    <div className="input-group">
-                      <label>Gender</label>
-                      <select name="sex" value={formData.sex} onChange={handleChange} required>
-                        <option value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                      </select>
-                    </div>
-                    <div className="input-group">
-                      <label>Date of Birth</label>
-                      <input type="date" name="dob" value={formData.dob} onChange={handleChange} required />
-                    </div>
-                  </div>
                 </div>
 
                 <div className="form-section">

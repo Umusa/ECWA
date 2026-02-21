@@ -116,7 +116,6 @@ const AdminMembers = () => {
                     </div>
                     
                     <div className="member-card-body">
-                      {member.dob && <div className="info-item"><Calendar size={14} /> <span>DOB: {member.dob}</span></div>}
                       {member.phone_personal && <div className="info-item"><Phone size={14} /> <span>{member.phone_personal}</span></div>}
                       {member.address && <div className="info-item"><MapPin size={14} /> <span>{member.address}</span></div>}
                     </div>

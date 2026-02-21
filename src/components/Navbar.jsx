@@ -18,8 +18,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'HOME', path: '/' },
     { name: 'ABOUT', path: '/about' },
-    { name: 'CONTACT US', path: '/prayer-request' },
-    { name: 'ADMIN', path: '/admin' },
+    { name: 'PRAYER REQUEST', path: '/prayer-request' },
   ];
 
   return (

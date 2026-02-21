@@ -8,7 +8,6 @@ import Footer from '../components/Footer';
 const PrayerRequest = () => {
   const [formData, setFormData] = useState({
     fullName: '',
-    email: '',
     subject: '',
     message: ''
   });
@@ -30,10 +29,11 @@ const PrayerRequest = () => {
         status: 'pending'
       });
       setStatus('success');
-      setFormData({ fullName: '', email: '', subject: '', message: '' });
+      setFormData({ fullName: '', subject: '', message: '' });
     } catch (err) {
+      console.error("Firestore Prayer Error:", err);
       setStatus('error');
-      setErrorMsg(err.message);
+      setErrorMsg(`Request failed: ${err.message}. Ensure your internet is active and database rules allow submissions.`);
     }
   };
 
@@ -71,7 +71,7 @@ const PrayerRequest = () => {
                       <MapPin size={24} color="var(--primary)" />
                       <div>
                         <h4 style={{ fontSize: '0.9rem', fontWeight: '800' }}>Church Office</h4>
-                        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Mai-Gero, Jos, Plateau State</p>
+                        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Ungwan Maigero, Kaduna State</p>
                       </div>
                     </div>
 
@@ -79,7 +79,7 @@ const PrayerRequest = () => {
                       <Phone size={24} color="var(--primary)" />
                       <div>
                         <h4 style={{ fontSize: '0.9rem', fontWeight: '800' }}>Counseling Line</h4>
-                        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>+234 (0) 123 456 7890</p>
+                        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>+234 803 592 4855</p>
                       </div>
                     </div>
                   </div>
@@ -87,14 +87,10 @@ const PrayerRequest = () => {
 
                 <div className="contact-form-box">
                   <form onSubmit={handleSubmit} className="reg-form">
-                    <div className="grid-2">
+                    <div className="grid-1">
                       <div className="input-group">
                         <label>Your Name</label>
                         <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full Name" required />
-                      </div>
-                      <div className="input-group">
-                        <label>Email (Optional)</label>
-                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
                       </div>
                     </div>
                     <div className="input-group">
