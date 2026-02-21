@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECWA GOSPEL MAI-GERO | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* INLINE CSS FOR IMMEDIATE RENDERING & CONSISTENCY */
+        :root {
+            --primary: #0047AB;
+            --primary-glow: rgba(0, 71, 171, 0.2);
+            --accent: #228B22;
+            --gold: #FFD700;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- CONSISTENT NAVBAR --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 40px; }
+        .logo-text { display: flex; flex-direction: column; }
+        .main-title { color: var(--primary); font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; line-height: 1; }
+        .sub-title { color: var(--text-muted); font-size: 0.65rem; letter-spacing: 1px; font-weight: 600; }
+        
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.85rem; transition: var(--transition); }
+        .nav-links a.active { color: var(--primary); }
+        .nav-cta { background: var(--primary); color: white !important; padding: 8px 20px; border-radius: 50px; }
+
+        /* --- HERO SECTION --- */
+        .hero-v2 {
+            height: 80vh; min-height: 500px;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=2000') center/cover no-repeat;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+            padding: 100px 5% 0;
+        }
+        .hero-content { max-width: 800px; }
+        .badge { background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 1rem; display: inline-block; }
+        .hero-v2 h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-family: 'Outfit'; line-height: 1.1; margin-bottom: 1.5rem; }
+        .highlight { color: var(--gold); }
+        .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        
+        .cta-btn { padding: 14px 28px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: var(--transition); border: none; cursor: pointer; }
+        .cta-btn.main { background: var(--primary); color: white; box-shadow: 0 10px 20px var(--primary-glow); }
+        .cta-btn.outline { border: 2px solid white; color: white; }
+
+        /* --- THEME GLASS CARD --- */
+        .theme-card-container { margin: 40px auto 0; padding: 0 5%; position: relative; z-index: 10; max-width: 1000px; }
+        .theme-glass-card {
+            background: rgba(255, 255, 255, 0.98); padding: 20px; border-radius: 24px; 
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid white;
+        }
+        .glow { color: var(--primary); font-weight: 800; animation: pulse 2s infinite; }
+
+        /* --- CONTENT GRID --- */
+        #features { padding: 80px 5%; }
+        .section-intro { text-align: center; margin-bottom: 50px; }
+        .section-title { font-size: 2.2rem; font-family: 'Outfit'; color: var(--primary); }
+        .underline { width: 50px; height: 4px; background: var(--gold); margin: 10px auto; border-radius: 2px; }
+        
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: var(--transition); }
+        .feature-card:hover { transform: translateY(-10px); }
+        .card-img { height: 200px; background-size: cover; background-position: center; }
+        .card-content { padding: 30px; text-align: center; }
+        .icon-circle { width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: -55px auto 20px; border: 4px solid white; }
+
+        /* --- SCHEDULE --- */
+        .schedule-section { background: #0f172a; color: white; padding: 80px 5%; border-radius: 40px 40px 0 0; }
+        .schedule-container { display: flex; flex-wrap: wrap; gap: 3rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+        .schedule-info { flex: 1; min-width: 300px; }
+        .schedule-list { flex: 1.2; min-width: 300px; }
+        .schedule-item { display: flex; gap: 20px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 15px; align-items: center; }
+        .day { font-weight: 800; color: var(--gold); width: 50px; }
+
+        /* --- FOOTER --- */
+        footer { background: #070b14; color: white; padding: 60px 5% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; text-align: left; }
+        .footer-logo-img {
+    height: 50px;
+    filter: brightness(0) invert(1); /* This turns the image white */
+    margin-bottom: 15px;
+}.footer-links a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 10px; font-size: 0.9rem; }
+        .social-icons { display: flex; gap: 15px; font-size: 1.2rem; margin-top: 15px; }
+
+        /* --- RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Consider adding a mobile menu button later */
+            .hero-v2 { height: 70vh; }
+            .hero-btns { flex-direction: column; }
+            .cta-btn { width: 100%; }
+            .schedule-container { text-align: center; }
+            .schedule-item { flex-direction: column; gap: 5px; }
+            .day { border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%; padding-bottom: 5px; }
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="ecwa-logo.png" alt="ECWA Logo">
+            <div class="logo-text">
+                <span class="main-title">ECWA GOSPEL</span>
+                <span class="sub-title">MAI-GERO PORTAL</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="active">HOME</a>
+            <a href="sermons.html">SERMONS</a>
+            <a href="about.html">ABOUT</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="join-community.html" class="nav-cta">JOIN US</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-v2">
+            <div class="hero-content">
+                <span class="badge">Welcome to the Family</span>
+                <h1>Lighting The Way,<br><span class="highlight">Changing Lives.</span></h1>
+                <p>Experience spiritual growth and authentic community at ECWA Gospel Church Mai-Gero. Your journey of faith starts here.</p>
+                <div class="hero-btns">
+                    <a href="join-community.html" class="cta-btn main">GET REGISTERED</a>
+                    <a href="#schedule" class="cta-btn outline">VIEW SERVICE TIMES</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="theme-card-container">
+            <div class="theme-glass-card">
+                <p style="color: var(--primary); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px;">2026 ANNUAL THEME</p>
+                <h2 style="font-family: 'Outfit'; font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 10px;">"KEEP YOUR LAMPS <span class="glow">BURNING...</span>"</h2>
+                <p style="font-style: italic; color: var(--text-muted);">- Luke 12:35 (NIV)</p>
+            </div>
+        </div>
+
+        <section id="features">
+            <div class="section-intro">
+                <h2 class="section-title">Our Impact</h2>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="content-grid">
+                <div class="feature-card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=800');"></div>
+                    <div class="card-content">
+                        <div class="icon-circle"><i class="fa-solid fa-cross"></i></div>
+                        <h3>Our Vision</h3>
+                        <p>To be a dynamic, Christ-centered church with a holistic mandate in a society where everyone is saved.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800');"></div>
+                    <div class="card-content">
+                        <div class="icon-circle"><i class="fa-solid fa-users"></i></div>
+                        <h3>Community</h3>
+                        <p>Engage in ministries and small groups designed to help you grow spiritually and socially.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="card-img" style="background-image: url(/nigeria-worship.jpg);"></div>
+                    <div class="card-content">
+                        <div class="icon-circle"><i class="fa-solid fa-earth-africa"></i></div>
+                        <h3>Global Mission</h3>
+                        <p>Reflecting ECWA's global mission to glorify God through evangelism and social service.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="schedule-section">
+            <div class="schedule-container">
+                <div class="schedule-info">
+                    <h2 style="font-size: 2.5rem; font-family: 'Outfit'; margin-bottom: 15px;">Weekly Fellowship</h2>
+                    <p style="color: #94a3b8;">Connect with us throughout the week. There is a place for everyone to belong and grow.</p>
+                </div>
+                <div class="schedule-list">
+                    <div class="schedule-item">
+                        <div class="day">SUN</div>
+                        <div>
+                            <h4 style="color: var(--gold);">Main Service</h4>
+                            <span style="font-size: 0.9rem; opacity: 0.8;">08:00 AM - 12:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="day">WED</div>
+                        <div>
+                            <h4 style="color: var(--gold);">Midweek Prayer</h4>
+                            <span style="font-size: 0.9rem; opacity: 0.8;">05:00 PM - 06:30 PM</span>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="day">FRI</div>
+                        <div>
+                            <h4 style="color: var(--gold);">Youth Fellowship</h4>
+                            <span style="font-size: 0.9rem; opacity: 0.8;">05:00 PM - 07:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   <footer>
+        <div class="footer-grid">
+            <div>
+               
+                <p style="font-size: 0.9rem; opacity: 0.8;">Building a community of faith, hope, and love in Mai-Gero.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px;">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="sermons.html">Sermons</a>
+                    <a href="join-community.html">Giving</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px;">Connect</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.6;">
+            &copy; 2026 ECWA Gospel Church Mai-Gero. All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
