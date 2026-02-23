@@ -25,10 +25,10 @@ const Home = () => {
       </section>
 
       {/* Theme Section */}
-      <section className="theme-section glass" style={{ background: 'transparent', marginTop: '-80px', position: 'relative', zIndex: '10' }}>
+      <section className="theme-section" style={{ background: 'transparent', marginTop: '-80px', position: 'relative', zIndex: '10', border: 'none' }}>
         <div className="container">
           <div className="theme-grid">
-            <div className="theme-card glass hover-3d fade-in" style={{ border: 'none', background: 'rgba(255,255,255,0.8)' }}>
+            <div className="theme-card glass hover-3d fade-in" style={{ background: 'rgba(255,255,255,0.8)' }}>
               <BookOpen className="theme-icon" size={40} />
               <h3>2026 ANNUAL THEME</h3>
               <p>"KEEP YOUR LAMPS BURNING..."</p>

@@ -673,7 +673,7 @@ input:focus, select:focus, textarea:focus {
 .hero {
   min-height: 100vh;
   background: linear-gradient(135deg, rgba(0, 71, 171, 0.5), rgba(15, 23, 42, 0.7)), 
-              url('https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=2000') center/cover no-repeat;
+              url('/hero-bg.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   color: white;
