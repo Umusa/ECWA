@@ -25,10 +25,10 @@ const Home = () => {
       </section>
 
       {/* Theme Section */}
-      <section className="theme-section" style={{ background: 'transparent', marginTop: '-80px', position: 'relative', zIndex: '10', border: 'none' }}>
+      <section className="theme-section-wrapper">
         <div className="container">
           <div className="theme-grid">
-            <div className="theme-card glass hover-3d fade-in" style={{ background: 'rgba(255,255,255,0.8)' }}>
+            <div className="theme-card glass hover-3d fade-in">
               <BookOpen className="theme-icon" size={40} />
               <h3>2026 ANNUAL THEME</h3>
               <p>"KEEP YOUR LAMPS BURNING..."</p>
@@ -47,17 +47,17 @@ const Home = () => {
           </div>
           
           <div className="features-grid">
-            <div className="feature-card glass hover-3d fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="feature-card glass hover-3d fade-in">
               <Users size={32} color="var(--primary)" />
               <h3>Community</h3>
               <p>Find a place to belong and grow with brothers and sisters in Christ.</p>
             </div>
-            <div className="feature-card glass hover-3d fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="feature-card glass hover-3d fade-in">
               <Play size={32} color="var(--primary)" />
               <h3>Worship</h3>
               <p>Experience deep, spiritual worship and sound biblical teachings.</p>
             </div>
-            <div className="feature-card glass hover-3d fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="feature-card glass hover-3d fade-in">
               <Heart size={32} color="var(--primary)" />
               <h3>Ministry</h3>
               <p>Discover your spiritual gifts and serve in various church ministries.</p>

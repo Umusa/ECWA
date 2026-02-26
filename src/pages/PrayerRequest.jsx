@@ -52,13 +52,13 @@ const PrayerRequest = () => {
     <div className="contact-page">
       <Navbar />
       
-      <section className="registration-hero" style={{ padding: '140px 0 80px' }}>
+      <section className="registration-hero">
         <div className="container">
-          <div className="form-card glass fade-in" style={{ border: 'none', boxShadow: 'var(--3d-shadow)', maxWidth: '1000px' }}>
+          <div className="form-card glass fade-in">
             <div className="form-header">
-              <MessageSquare size={52} color="var(--primary)" className="floating" style={{ margin: '0 auto 20px' }} />
-              <h2 className="text-shimmer" style={{ fontSize: '2.5rem' }}>BURDEN OF INTERCESSION</h2>
-              <p style={{ letterSpacing: '4px' }}>ECWA GOSPEL CHURCH MAI-GERO</p>
+              <MessageSquare size={52} color="var(--primary)" className="floating" />
+              <h2 className="text-shimmer">BURDEN OF INTERCESSION</h2>
+              <p>ECWA GOSPEL CHURCH MAI-GERO</p>
             </div>
 
             {status === 'success' ? (
@@ -69,28 +69,28 @@ const PrayerRequest = () => {
                 <button onClick={() => setStatus('idle')} className="btn-primary">SUBMIT ANOTHER REQUEST</button>
               </div>
             ) : (
-              <div className="contact-grid-main" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+              <div className="contact-grid-main">
                 <div className="contact-info-box">
-                  <h3 style={{ color: 'var(--primary)', marginBottom: '20px', fontSize: '1.5rem' }}>We Stand with You</h3>
-                  <p style={{ marginBottom: '30px', color: 'var(--text-muted)', lineHeight: '1.8' }}>
+                  <h3>We Stand with You</h3>
+                  <p>
                     The Bible says, "The effectual fervent prayer of a righteous man availeth much."
                     Whatever the burden, we believe God hears and answers.
                   </p>
                   
-                  <div className="contact-details" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    <div className="detail-item glass hover-3d" style={{ display: 'flex', alignItems: 'center', gap: '15px', padding: '15px', borderRadius: '15px' }}>
+                  <div className="contact-details">
+                    <div className="detail-item glass hover-3d">
                       <MapPin size={24} color="var(--primary)" />
                       <div>
-                        <h4 style={{ fontSize: '0.9rem', fontWeight: '800' }}>Church Office</h4>
-                        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Ungwan Maigero, Kaduna State</p>
+                        <h4>Church Office</h4>
+                        <p>Ungwan Maigero, Kaduna State</p>
                       </div>
                     </div>
 
-                    <div className="detail-item glass hover-3d" style={{ display: 'flex', alignItems: 'center', gap: '15px', padding: '15px', borderRadius: '15px' }}>
+                    <div className="detail-item glass hover-3d">
                       <Phone size={24} color="var(--primary)" />
                       <div>
-                        <h4 style={{ fontSize: '0.9rem', fontWeight: '800' }}>Counseling Line</h4>
-                        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>+234 803 592 4855</p>
+                        <h4>Counseling Line</h4>
+                        <p>+234 803 592 4855</p>
                       </div>
                     </div>
                   </div>
@@ -114,13 +114,13 @@ const PrayerRequest = () => {
                     </div>
 
                     {status === 'error' && (
-                      <div className="error-box glass" style={{ marginBottom: '20px' }}>
+                      <div className="error-box glass">
                         <AlertCircle size={20} />
                         <p>{errorMsg}</p>
                       </div>
                     )}
 
-                    <button type="submit" className="submit-btn btn-primary" style={{ width: '100%' }} disabled={status === 'submitting'}>
+                    <button type="submit" className="submit-btn btn-primary" disabled={status === 'submitting'}>
                       {status === 'submitting' ? (
                         <><Loader2 className="spinner" size={20} /> INTERCEDING...</>
                       ) : <><Send size={18} /> SUBMIT PRAYER REQUEST</>}

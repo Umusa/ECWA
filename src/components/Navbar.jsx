@@ -28,7 +28,7 @@ const Navbar = () => {
           <img src="/ecwa-logo.png" alt="ECWA Logo" className="logo-img" />
           <div className="logo-text">
             <span className="main-title">ECWA GOSPEL</span>
-            <span className="sub-title">MAI-GERO PORTAL</span>
+            <span className="sub-title">MAI-GERO</span>
           </div>
         </Link>
 

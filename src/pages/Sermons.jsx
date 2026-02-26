@@ -78,7 +78,7 @@ const Sermons = () => {
         
         <div className="content-grid">
           {filteredItems.map((item, index) => (
-            <div key={index} className="media-card glass hover-3d fade-in" style={{ animationDelay: `${index * 0.1}s`, border: 'none' }}>
+            <div key={index} className="media-card glass hover-3d fade-in">
               <div className="media-container">
                 <img src={item.image} className="card-img" alt={item.title} />
                 <div className="play-overlay">

@@ -19,12 +19,12 @@ const About = () => {
 
       <section className="about-content container">
         <div className="vision-mission-grid">
-          <div className="info-card glass hover-3d fade-in" style={{ border: 'none', animationDelay: '0.2s' }}>
+          <div className="info-card glass hover-3d fade-in">
             <Target className="icon" size={40} color="var(--primary)" />
             <h3>Our Mission</h3>
             <p>To glorify God by reaching out to the lost, making disciples, and nurturing believers towards spiritual maturity and holiness in Christ Jesus.</p>
           </div>
-          <div className="info-card glass hover-3d fade-in" style={{ border: 'none', animationDelay: '0.4s' }}>
+          <div className="info-card glass hover-3d fade-in">
             <Eye className="icon" size={40} color="var(--primary)" />
             <h3>Our Vision</h3>
             <p>To be a vibrant, Christ-centered community that impacts Mai-Gero and the world through the transformative power of the Gospel and the fire of the Holy Spirit.</p>
