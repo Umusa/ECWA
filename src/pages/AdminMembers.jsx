@@ -68,7 +68,7 @@ const AdminMembers = () => {
     <div className="admin-page">
       <Navbar />
       
-      <main className="admin-content container" style={{ padding: '120px 0 80px' }}>
+      <main className="admin-content container">
         <div className="admin-nav-back">
           <Link to="/admin" className="back-link"><ArrowLeft size={18} /> Back to Dashboard</Link>
         </div>
@@ -90,22 +90,22 @@ const AdminMembers = () => {
         </header>
 
         {loading ? (
-          <div className="admin-loader" style={{ textAlign: 'center', padding: '100px 0' }}>
-            <Loader2 className="spinner" size={40} style={{ margin: '0 auto 20px' }} />
+          <div className="admin-loader">
+            <Loader2 className="spinner" size={40} />
             <p>Fetching member database...</p>
           </div>
         ) : fetchError ? (
-          <div className="admin-error-box glass" style={{ margin: '40px auto', padding: '40px', textAlign: 'center', maxWidth: '600px', color: '#ff4d4d' }}>
-            <AlertCircle size={48} style={{ margin: '0 auto 20px' }} />
+          <div className="admin-error-box glass">
+            <AlertCircle size={48} />
             <h3>Sync Failed</h3>
-            <p style={{ margin: '15px 0' }}>{fetchError}</p>
+            <p>{fetchError}</p>
             <button onClick={fetchMembers} className="btn-primary">Retry Sync</button>
           </div>
         ) : (
           <div className="admin-list-container glass">
             {filteredMembers.length === 0 ? (
-              <div className="empty-state" style={{ textAlign: 'center', padding: '60px' }}>
-                <Users size={48} style={{ opacity: 0.3, marginBottom: '20px' }} />
+              <div className="empty-state">
+                <Users size={48} />
                 <p>No members found matching your search.</p>
               </div>
             ) : (

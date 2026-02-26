@@ -58,13 +58,13 @@ const JoinCommunity = () => {
     <div className="join-page">
       <Navbar />
       
-      <section className="registration-hero" style={{ padding: '140px 0 80px' }}>
+      <section className="registration-hero">
         <div className="container">
-          <div className="form-card glass fade-in" style={{ border: 'none', boxShadow: 'var(--3d-shadow)', maxWidth: '900px' }}>
+          <div className="form-card glass fade-in">
             <div className="form-header">
-              <img src="/ecwa-logo.png" alt="ECWA Logo" className="form-logo floating" style={{ height: '80px', marginBottom: '20px' }} />
-              <h2 className="text-shimmer" style={{ fontSize: '2.5rem' }}>MEMBERSHIP PORTAL</h2>
-              <p style={{ letterSpacing: '3px' }}>ECWA GOSPEL CHURCH MAI-GERO</p>
+              <img src="/ecwa-logo.png" alt="ECWA Logo" className="form-logo floating" />
+              <h2 className="text-shimmer">MEMBERSHIP PORTAL</h2>
+              <p>ECWA GOSPEL CHURCH MAI-GERO</p>
             </div>
 
             {status === 'success' ? (
@@ -78,7 +78,7 @@ const JoinCommunity = () => {
               <form onSubmit={handleSubmit} className="reg-form">
                 <div className="form-section">
                   <div className="section-title"><User size={20} /> Personal Profile</div>
-                  <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr', gap: '20px' }}>
+                  <div className="grid-3">
                     <div className="input-group">
                       <label>Title</label>
                       <select name="title" value={formData.title} onChange={handleChange} required>

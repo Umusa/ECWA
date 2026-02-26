@@ -8,6 +8,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import PrayerRequest from './pages/PrayerRequest';
 import AdminMembers from './pages/AdminMembers';
 import AdminPrayers from './pages/AdminPrayers';
+import MemberDetails from './pages/MemberDetails';
+import PrayerDetails from './pages/PrayerDetails';
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/prayer-request" element={<PrayerRequest />} />
         <Route path="/admin/members" element={<AdminMembers />} />
+        <Route path="/admin/members/:id" element={<MemberDetails />} />
         <Route path="/admin/prayers" element={<AdminPrayers />} />
+        <Route path="/admin/prayers/:id" element={<PrayerDetails />} />
       </Routes>
     </Router>
   );

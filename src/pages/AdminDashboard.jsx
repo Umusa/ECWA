@@ -97,7 +97,7 @@ const AdminDashboard = () => {
   if (!user) {
     return (
       <div className="admin-login-page">
-        <div className="login-container glass fade-in" style={{ border: 'none', boxShadow: 'var(--3d-shadow)' }}>
+        <div className="login-container glass fade-in">
           <div className="login-header">
             <img src="/ecwa-logo.png" alt="ECWA Logo" className="login-logo" />
             <h2>Portal Access</h2>
@@ -172,7 +172,7 @@ const AdminDashboard = () => {
         </header>
 
         <div className="stats-grid">
-          <div className="stat-card glass hover-3d" style={{ border: 'none' }}>
+          <div className="stat-card glass hover-3d">
             <div className="stat-icon members-icon">
               <Users size={24} />
             </div>
@@ -183,7 +183,7 @@ const AdminDashboard = () => {
             <TrendingUp className="stat-trend" size={16} />
           </div>
 
-          <div className="stat-card glass hover-3d" style={{ border: 'none' }}>
+          <div className="stat-card glass hover-3d">
             <div className="stat-icon prayers-icon">
               <HandHeart size={24} />
             </div>
@@ -196,7 +196,7 @@ const AdminDashboard = () => {
         </div>
 
         {statsError && (
-          <div className="stats-error-box glass" style={{ marginTop: '20px', padding: '15px', color: '#ff4d4d', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="stats-error-box glass">
             <AlertCircle size={20} />
             <p>{statsError} - Please verify your Firebase project settings in Vercel.</p>
             <button onClick={fetchStats} className="btn-mini">Retry</button>

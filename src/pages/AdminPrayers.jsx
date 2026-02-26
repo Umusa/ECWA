@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, query, orderBy, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { HandHeart, Trash2, ArrowLeft, Loader2, MessageSquare, Clock, CheckCircle, User, AlertCircle } from 'lucide-react';
+import { HandHeart, Trash2, ArrowLeft, Loader2, MessageSquare, Clock, CheckCircle, User, AlertCircle, Eye } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -85,7 +85,7 @@ const AdminPrayers = () => {
     <div className="admin-page">
       <Navbar />
       
-      <main className="admin-content container" style={{ padding: '120px 0 80px' }}>
+      <main className="admin-content container">
         <div className="admin-nav-back">
           <Link to="/admin" className="back-link"><ArrowLeft size={18} /> Back to Dashboard</Link>
         </div>
@@ -101,56 +101,87 @@ const AdminPrayers = () => {
         </header>
 
         {loading ? (
-          <div className="admin-loader" style={{ textAlign: 'center', padding: '100px 0' }}>
-            <Loader2 className="spinner" size={40} style={{ margin: '0 auto 20px' }} />
+          <div className="admin-loader">
+            <Loader2 className="spinner" size={40} />
             <p>Gathering intercessions...</p>
           </div>
         ) : fetchError ? (
-          <div className="admin-error-box glass" style={{ margin: '40px auto', padding: '40px', textAlign: 'center', maxWidth: '600px', color: '#ff4d4d' }}>
-            <AlertCircle size={48} style={{ margin: '0 auto 20px' }} />
+          <div className="admin-error-box glass">
+            <AlertCircle size={48} />
             <h3>Sync Failed</h3>
-            <p style={{ margin: '15px 0' }}>{fetchError}</p>
+            <p>{fetchError}</p>
             <button onClick={fetchPrayers} className="btn-primary">Retry Sync</button>
           </div>
         ) : (
-          <div className="prayers-list glass">
+          <div className="admin-table-wrapper glass fade-in">
             {prayers.length === 0 ? (
-              <div className="empty-state" style={{ textAlign: 'center', padding: '60px' }}>
-                <MessageSquare size={48} style={{ opacity: 0.3, marginBottom: '20px' }} />
+              <div className="empty-state">
+                <MessageSquare size={48} />
                 <p>No prayer requests currently in the database.</p>
               </div>
             ) : (
-              <div className="prayers-grid">
-                {prayers.map(prayer => (
-                  <div key={prayer.id} className={`prayer-item glass hover-3d ${prayer.status === 'prayed' ? 'status-prayed' : ''}`}>
-                    <div className="prayer-meta">
-                      <div className="requestor">
-                        <User size={16} /> <span>{prayer.fullName || 'Anonymous'}</span>
-                      </div>
-                      <div className="date">
-                        <Clock size={14} /> <span>{formatDate(prayer.submittedAt)}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="prayer-content">
-                      <h3>{prayer.subject}</h3>
-                      <p>{prayer.message}</p>
-                    </div>
-
-                    <div className="prayer-actions">
-                      <button 
-                        onClick={() => toggleStatus(prayer.id, prayer.status)} 
-                        className={`status-btn ${prayer.status === 'prayed' ? 'btn-prayed' : 'btn-pending'}`}
-                      >
-                        {prayer.status === 'prayed' ? <><CheckCircle size={14} /> PRAYED FOR</> : 'MARK AS PRAYED'}
-                      </button>
-                      <button onClick={() => handleDelete(prayer.id)} className="delete-btn-minimal" title="Remove request">
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <table className="admin-list-table">
+                <thead>
+                  <tr>
+                    <th>Requester</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {prayers.map(prayer => (
+                    <tr key={prayer.id} className={prayer.status === 'prayed' ? 'status-prayed-row' : ''}>
+                      <td>
+                        <div className="admin-row-info">
+                          <User size={16} />
+                          <h4>{prayer.fullName || 'Anonymous'}</h4>
+                        </div>
+                      </td>
+                      <td>
+                        <span style={{ fontSize: '0.9rem', fontWeight: '600' }}>{prayer.subject}</span>
+                      </td>
+                      <td>
+                        <span className={`status-badge ${prayer.status}`} style={{
+                          padding: '4px 10px',
+                          borderRadius: '12px',
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          background: prayer.status === 'prayed' ? 'rgba(34,139,34,0.1)' : 'rgba(255,215,0,0.1)',
+                          color: prayer.status === 'prayed' ? 'var(--accent)' : '#b45309'
+                        }}>
+                          {prayer.status ? prayer.status.toUpperCase() : 'PENDING'}
+                        </span>
+                      </td>
+                      <td>
+                        <span style={{ fontSize: '0.85rem' }}>{formatDate(prayer.submittedAt)}</span>
+                      </td>
+                      <td>
+                        <div className="action-btns">
+                          <Link to={`/admin/prayers/${prayer.id}`} className="btn-view" title="View Burden">
+                            <Eye size={16} /> VIEW
+                          </Link>
+                          <button 
+                            onClick={() => toggleStatus(prayer.id, prayer.status)} 
+                            className={`status-btn-minimal ${prayer.status === 'prayed' ? 'prayed' : ''}`}
+                            title={prayer.status === 'prayed' ? 'Mark as Pending' : 'Mark as Prayed'}
+                          >
+                            <CheckCircle size={16} />
+                          </button>
+                          <button 
+                            onClick={() => handleDelete(prayer.id)} 
+                            className="btn-delete" 
+                            title="Delete Request"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             )}
           </div>
         )}
