@@ -24,6 +24,11 @@
 }
 
 /* Admin Sub-pages Styles */
+.admin-page {
+  padding-top: 120px;
+  min-height: 100vh;
+}
+
 .admin-header-flex {
   display: flex;
   justify-content: space-between;
@@ -144,10 +149,50 @@
   border-radius: 50%;
 }
 
-.delete-icon-btn:hover, .delete-btn-minimal:hover {
+.delete-icon-btn:hover, .delete-btn-minimal:hover, .btn-delete:hover {
   background: rgba(239, 68, 68, 0.1);
   transform: scale(1.1);
 }
+
+.action-btns {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-view {
+  background: rgba(0, 71, 171, 0.1);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-view:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-approve, .btn-reject, .btn-pend, .btn-delete {
+  padding: 8px;
+  border-radius: 50%;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-approve:hover { background: rgba(34, 139, 34, 0.1); transform: scale(1.1); }
+.btn-reject:hover { background: rgba(239, 68, 68, 0.1); transform: scale(1.1); }
+.btn-pend:hover { background: rgba(255, 215, 0, 0.1); transform: scale(1.1); }
+.btn-delete:hover { background: rgba(239, 68, 68, 0.1); transform: scale(1.1); }
 
 /* Prayer List Styles */
 .prayers-grid {
@@ -1591,10 +1636,34 @@ input:focus, select:focus, textarea:focus {
   border-bottom: none;
 }
 
-.admin-row-info {
+/* Admin Tabs Styles */
+.admin-tabs {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 10px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.tab-btn:hover {
+  background: var(--bg-light);
+  color: var(--primary);
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .admin-row-info h4 {

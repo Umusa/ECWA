@@ -37,6 +37,7 @@ const JoinCommunity = () => {
       await Promise.race([
         addDoc(collection(db, 'members'), {
           ...formData,
+          status: 'pending',
           submittedAt: serverTimestamp()
         }),
         timeoutPromise
